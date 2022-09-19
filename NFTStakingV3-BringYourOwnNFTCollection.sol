@@ -120,7 +120,7 @@ contract NFTStaking is Ownable, IERC721Receiver {
       require(staked.owner == account, "not an owner");
       uint256 stakedAt = staked.timestamp;
       rewardmath = 100 ether * (block.timestamp - stakedAt) / 86400 ;
-      earned = rewardmath / 100;
+      earned += rewardmath / 100;
       vault[tokenId] = Stake({
         owner: account,
         tokenId: uint24(tokenId),
@@ -146,7 +146,7 @@ contract NFTStaking is Ownable, IERC721Receiver {
       Stake memory staked = vault[tokenId];
       require(staked.owner == account, "not an owner");
       uint256 stakedAt = staked.timestamp;
-      rewardmath = 100 ether * (block.timestamp - stakedAt) / 86400;
+      rewardmath += 100 ether * (block.timestamp - stakedAt) / 86400;
       earned = rewardmath / 100;
 
     }
